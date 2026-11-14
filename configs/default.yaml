@@ -1,0 +1,10 @@
+# Fixed before the tests were run.
+universe: [AGNC, NLY, ARR, ORC, DX, TWO]   # agency-focused mortgage REITs with weekly data from 2008-2013; equal-weight basket rebalanced weekly
+sample_start: "2008-06-01"
+train_test_split: "2017-01-01"            # regressions and the timing rule are reported 2008-2016 and 2017-2026
+timing_rule: {lookback_weeks: 13, threshold: "expanding median of trailing realised 10-year yield vol (2 years minimum)", cost_bp_per_switch: 10}
+hypothesis: "Mortgage REITs carry negative convexity: weekly returns fall when the 10-year yield moves a lot in either direction (negative coefficient on the squared yield change)."
+sources:
+  stock_prices.parquet: {url: "https://huggingface.co/datasets/defeatbeta/yahoo-finance-data/resolve/main/data/US/stock_prices.parquet", licence: "ODC-BY", sha256: "4c522ec0dee02cb6554b5c3e4929d512327715c8f89670f9b1898b2403912f98"}
+  stock_dividend_events.parquet: {url: "https://huggingface.co/datasets/defeatbeta/yahoo-finance-data/resolve/main/data/US/stock_dividend_events.parquet", licence: "ODC-BY", sha256: "9eb8265ac9d21997a8d9a31f7ee8e5099c42ca2508fe36a07929595b378d4b54"}
+  daily_treasury_yield.parquet: {url: "https://huggingface.co/datasets/defeatbeta/yahoo-finance-data/resolve/main/data/US/daily_treasury_yield.parquet", licence: "ODC-BY", sha256: "34f65d005dd53c16e4cdabdbf22621dca95fa7e741dde184cb6ae67eea01bf2d"}
